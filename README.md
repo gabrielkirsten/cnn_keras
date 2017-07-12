@@ -5,7 +5,7 @@ __version__: 0.1.1
 A simple image classifier built with __Keras__ using __cuda__ libraries.  
 
 ### Requirements:
-- You must Install:
+* You must Install:
     1. [Python 2.7](https://www.python.org/downloads/);
     2. [Nvidia cuda libraries](https://developer.nvidia.com/cuda-downloads);
     3. [Nvidia cuDCNN libraries](https://developer.nvidia.com/cudnn);
