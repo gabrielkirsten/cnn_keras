@@ -5,12 +5,13 @@ __version__: 0.1.1
 A simple image classifier built with __Keras__ using __cuda__ libraries.  
 
 ### Requirements:
-* You must Install:
-    1. [Python 2.7](https://www.python.org/downloads/);
-    2. [Nvidia cuda libraries](https://developer.nvidia.com/cuda-downloads);
-    3. [Nvidia cuDCNN libraries](https://developer.nvidia.com/cudnn);
-    4. [Tensorflow](https://www.tensorflow.org/install/) or [Theano](http://deeplearning.net/software/theano/install.html)\*;
-    5. [Keras](https://keras.io/#installation);
+__You must Install:__  
+
+1. [Python 2.7](https://www.python.org/downloads/);
+2. [Nvidia cuda libraries](https://developer.nvidia.com/cuda-downloads);
+3. [Nvidia cuDCNN libraries](https://developer.nvidia.com/cudnn);
+4. [Tensorflow](https://www.tensorflow.org/install/) or [Theano](http://deeplearning.net/software/theano/install.html)\*;
+5. [Keras](https://keras.io/#installation);
 
 **note**:  
 \* never tested on Theano.
