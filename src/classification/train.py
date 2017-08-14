@@ -17,15 +17,11 @@ validation_data_dir = '../../data/validation'
 
 train_samples = 0
 for directory_class in [x[0] for x in os.walk(train_data_dir)]:
-    train_samples = train_samples
-    + len([name for name in os.listdir(directory_class)
-          if os.path.isfile(os.path.join(directory_class, name))])
+    train_samples = train_samples + len([name for name in os.listdir(directory_class) if os.path.isfile(os.path.join(directory_class, name))])
 
 validation_samples = 0
 for directory_class in [x[0] for x in os.walk(train_data_dir)]:
-    validation_samples = validation_samples
-    + len([name for name in os.listdir(directory_class)
-          if os.path.isfile(os.path.join(directory_class, name))])
+    validation_samples = validation_samples + len([name for name in os.listdir(directory_class) if os.path.isfile(os.path.join(directory_class, name))])
 
 epoch = 6
 
@@ -33,9 +29,7 @@ epoch = 6
 def create_model():
     """Create the model"""
     model = Sequential()
-    model.add(Convolution2D(16, (5, 5),
-                            activation='relu',
-                            input_shape=(img_width, img_height, 3)))
+    model.add(Convolution2D(16, (5, 5), activation='relu',input_shape=(img_width, img_height, 3)))
     model.add(MaxPooling2D(2, 2))
 
     model.add(Convolution2D(32, (5, 5), activation='relu'))
