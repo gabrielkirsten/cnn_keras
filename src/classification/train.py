@@ -109,27 +109,50 @@ def main():
 
     args = get_args()  # read args
 
-    if args["architecture"] == "Xception":
-        model = applications.Xception(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    elif args["architecture"] == "VGG16":
-        model = applications.VGG16(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    elif args["architecture"] == "VGG19":
-        model = applications.VGG19(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    elif args["architecture"] == "ResNet50":
-        model = applications.ResNet50(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    elif args["architecture"] == "InceptionV3":
-        model = applications.InceptionV3(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
-    elif args["architecture"] == "MobileNet":
-        model = applications.MobileNet(
-            weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+    if args["fineTunningRate"] != -1:
+        if args["architecture"] == "Xception":
+            model = applications.Xception(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "VGG16":
+            model = applications.VGG16(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "VGG19":
+            model = applications.VGG19(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "ResNet50":
+            model = applications.ResNet50(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "InceptionV3":
+            model = applications.InceptionV3(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "MobileNet":
+            model = applications.MobileNet(
+                weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
 
-    for layer in model.layers[:int(len(model.layers) * (args["fineTunningRate"] / 100))]:
-        layer.trainable = False
+        for layer in model.layers[:int(len(model.layers) * (args["fineTunningRate"] / 100))]:
+            layer.trainable = False
+
+    else:  # without transfer learning
+        if args["architecture"] == "Xception":
+            model = applications.Xception(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "VGG16":
+            model = applications.VGG16(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "VGG19":
+            model = applications.VGG19(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "ResNet50":
+            model = applications.ResNet50(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "InceptionV3":
+            model = applications.InceptionV3(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        elif args["architecture"] == "MobileNet":
+            model = applications.MobileNet(
+                weights=None, include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
+        for layer in model.layers:
+            layer.trainable = True
 
     # Adding custom Layers
     new_custom_layers = model.output
@@ -160,7 +183,7 @@ def main():
     train_generator = train_datagen.flow_from_directory(
         TRAIN_DATA_DIR,
         target_size=(IMG_HEIGHT, IMG_WIDTH),
-        batch_size=BATCH_SIZE,        
+        batch_size=BATCH_SIZE,
         shuffle=True,
         class_mode="categorical")
 
