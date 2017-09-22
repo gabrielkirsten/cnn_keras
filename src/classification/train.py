@@ -160,6 +160,7 @@ def main():
     train_generator = train_datagen.flow_from_directory(
         TRAIN_DATA_DIR,
         target_size=(IMG_HEIGHT, IMG_WIDTH),
+        batch_size=BATCH_SIZE,        
         shuffle=True,
         class_mode="categorical")
 
@@ -175,6 +176,7 @@ def main():
     validation_generator = test_datagen.flow_from_directory(
         VALIDATION_DATA_DIR,
         target_size=(IMG_HEIGHT, IMG_WIDTH),
+        batch_size=BATCH_SIZE,
         shuffle=True,
         class_mode="categorical")
 
