@@ -1,33 +1,35 @@
 #!/bin/bash
 
 #
-#    Script - split data between train and test
+#    Script - convert tif to png
 #
-#    Name: script_split_data.sh
+#    Name: script_convertall.sh
 #    Author: Gabriel Kirsten Menezes (gabriel.kirsten@hotmail.com)
 #
 
-echo "[SCRIPT SPLIT DATA] Initializing..."
+echo "[SCRIPT CONVERT ALL] Initializing..."
 
 dir_train="../data/train"
 dir_validation="../data/validation"
-perc_train=70
+
+echo "[SCRIPT CONVERT ALL] Converting train..."
 
 for dir_class in `ls $dir_train`;
 do
-    echo "[SCRIPT SPLIT DATA] Spliting class -" $dir_class;
-    mkdir $dir_validation/$dir_class
-    quantity_files=`ls $dir_train/$dir_class | wc -l`
-    perc_quantity_files=$((($quantity_files/100)*$perc_train))
-    counter=0
-    arrayFiles=`ls $dir_train/$dir_class |sort -R`
-    for file in $arrayFiles;
-    do
-        let "counter += 1"
-        if [[ $counter -gt $perc_quantity_files ]]; then
-            mv $dir_train/$dir_class/$file $dir_validation/$dir_class/$file
-        fi
-    done
+    echo "[SCRIPT CONVERT ALL] Converting class -" $dir_class;
+    convert $dir_train/$dir_class/* $dir_train/$dir_class/$dir_class.png
+    echo "[SCRIPT CONVERT ALL] Removing all .tif files in $dir_class ..."
+    rm $dir_train/$dir_class/*.tif
 done
 
-echo "[SCRIPT SPLIT DATA] OK! DONE."
+echo "[SCRIPT CONVERT ALL] Converting validation..."
+
+for dir_class in `ls $dir_validation`;
+do
+    echo "[SCRIPT CONVERT ALL] Converting class -" $dir_class;
+    convert $dir_validation/$dir_class/* $dir_validation/$dir_class/$dir_class.png
+    echo "[SCRIPT CONVERT ALL] Removing all .tif files in $dir_class ..."
+    rm $dir_validation/$dir_class/*.tif
+done
+
+echo "[SCRIPT CONVERT ALL] OK! DONE."
