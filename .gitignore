@@ -17,3 +17,7 @@ Thumbs.db
 # Pycharm files #
 #################
 .idea
+
+# VisualStudio Code files #
+###########################
+.vscode
