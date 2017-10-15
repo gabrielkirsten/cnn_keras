@@ -35,7 +35,7 @@ $ sudo python ./main.py
         |   |   |-- validation (validation images directory)  
         |   |   |   |-- .gitignore (git ignore)
         |   |-- models_checkpoints (where the model weights are located)
-	|   |-- output_images (where the confusion matrix are located) 
+        |   |-- output_images (where the confusion matrix are located) 
         |   |-- src (source files) 
         |   |	|-- main.py (python source code)  
         |   |-- utils (some scripts)  
