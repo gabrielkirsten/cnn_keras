@@ -51,7 +51,7 @@ def get_args():
                            ", InceptionV3, MobileNet)",
                            default=None, type=str)
 
-    arg_parse.add_argument("-f", "--fineTunningRate", required=True,
+    arg_parse.add_argument("-f", "--fineTuningRate", required=True,
                            help="Fine tunning rate", default=None, type=int)
 
     return vars(arg_parse.parse_args())
@@ -98,7 +98,7 @@ def make_confusion_matrix_and_plot(validation_generator, file_name, model_final)
                           classes=CLASS_NAMES,
                           title='Confusion matrix - ' + file_name)
 
-    plt.savefig('output_images/' + file_name + '.png')
+    plt.savefig('../output_images/' + file_name + '.png')
 
     print("Total time after generate confusion matrix: %s" %
           (time.time() - START_TIME))
@@ -109,7 +109,7 @@ def main():
 
     args = get_args()  # read args
 
-    if args["fineTunningRate"] != -1:
+    if args["fineTuningRate"] != -1:
         if args["architecture"] == "Xception":
             model = applications.Xception(
                 weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
@@ -129,7 +129,7 @@ def main():
             model = applications.MobileNet(
                 weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
 
-        for layer in model.layers[:int(len(model.layers) * (args["fineTunningRate"] / 100))]:
+        for layer in model.layers[:int(len(model.layers) * (args["fineTuningRate"] / 100))]:
             layer.trainable = False
 
     else:  # without transfer learning
@@ -204,15 +204,15 @@ def main():
         class_mode="categorical")
 
     # select .h5 filename
-    if args["fineTunningRate"] == 100:
+    if args["fineTuningRate"] == 100:
         file_name = args["architecture"] + \
             '_transfer_learning'
-    elif args["fineTunningRate"] == -1:
+    elif args["fineTuningRate"] == -1:
         file_name = args["architecture"] + \
             '_without_transfer_learning'
     else:
         file_name = args["architecture"] + \
-            '_fine_tunning_' + str(args["fineTunningRate"])
+            '_fine_tunning_' + str(args["fineTuningRate"])
 
     # Save the model according to the conditions
     checkpoint = ModelCheckpoint("../models_checkpoints/" + file_name + ".h5", monitor='val_acc',
