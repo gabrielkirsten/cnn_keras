@@ -23,7 +23,7 @@ __You must Install:__
 ```
 $ sudo python ./main.py
 ```
-*(you must specify the class names and image file to be predicted, please read the --help)*
+*(you must specify the architecture and fineTuningRate, please read the --help)*
 
 ### Directory structure
 
@@ -34,7 +34,7 @@ $ sudo python ./main.py
         |   |   |   |-- .gitignore (git ignore)
         |   |   |-- validation (validation images directory)  
         |   |   |   |-- .gitignore (git ignore)
-        |   |-- models_checkpoints (where the model weights are located) 
+        |   |-- models_checkpoints (where the model weights are located)
 	|   |-- output_images (where the confusion matrix are located) 
         |   |-- src (source files) 
         |   |	|-- main.py (python source code)  
