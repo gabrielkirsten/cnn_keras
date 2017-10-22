@@ -38,9 +38,11 @@ TRAIN_DATA_DIR = "../data/train"
 VALIDATION_DATA_DIR = "../data/validation"
 BATCH_SIZE = 16
 EPOCHS = 50
-CLASS_NAMES = ['ferrugemAsiatica', 'folhaSaudavel',
-               'fundo', 'manchaAlvo', 'mildio', 'oidio']
+CLASS_NAMES = ['ferrugemAsiatica', 'folhaSaudavel', 'fundo', 'manchaAlvo', 'mildio', 'oidio']
 
+# =========================================================
+# End of constants
+# =========================================================
 
 def get_args():
     """Read the arguments of the program."""
