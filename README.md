@@ -25,6 +25,14 @@ $ sudo python ./main.py -a your_architecture -f your_finetuning_rate
 ```
 *(you must specify the architecture and fineTuningRate, please read the --help)*
 
+### Architectures available (-a parameter)
+        * VGG16
+        * VGG19
+        * Xception
+        * InceptionV3
+        * ResNet50
+        * MobileNet
+
 ### Directory structure
 
         .  
