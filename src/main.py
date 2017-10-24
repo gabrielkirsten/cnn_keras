@@ -29,7 +29,7 @@ from sklearn.metrics import confusion_matrix
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress warnings
 
 # =========================================================
-# Constants
+# Constants and hyperparameters
 # =========================================================
 
 START_TIME = time.time()
@@ -38,10 +38,11 @@ TRAIN_DATA_DIR = "../data/train"
 VALIDATION_DATA_DIR = "../data/validation"
 BATCH_SIZE = 16
 EPOCHS = 50
+LEARNING_RATE = 0.0001
 CLASS_NAMES = ['ferrugemAsiatica', 'folhaSaudavel', 'fundo', 'manchaAlvo', 'mildio', 'oidio']
 
 # =========================================================
-# End of constants
+# End of constants and hyperparameters
 # =========================================================
 
 def get_args():
@@ -169,7 +170,7 @@ def main():
 
     # compile the model
     model_final.compile(loss="categorical_crossentropy",
-                        optimizer=optimizers.SGD(lr=0.0001, momentum=0.9),
+                        optimizer=optimizers.SGD(lr=LEARNING_RATE, momentum=0.9),
                         metrics=["accuracy"])
 
     # Initiate the train and test generators with data Augumentation
