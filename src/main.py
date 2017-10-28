@@ -157,22 +157,6 @@ def main():
         for layer in model.layers:
             layer.trainable = True
 
-    # Adding custom Layers
-    new_custom_layers = model.output
-    new_custom_layers = Flatten()(new_custom_layers)
-    new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
-    new_custom_layers = Dropout(0.5)(new_custom_layers)
-    new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
-    predictions = Dense(6, activation="softmax")(new_custom_layers)
-
-    # creating the final model
-    model_final = Model(inputs=model.input, outputs=predictions)
-
-    # compile the model
-    model_final.compile(loss="categorical_crossentropy",
-                        optimizer=optimizers.SGD(lr=LEARNING_RATE, momentum=0.9),
-                        metrics=["accuracy"])
-
     # Initiate the train and test generators with data Augumentation
     train_datagen = ImageDataGenerator(
         rescale=1. / 255,
@@ -205,6 +189,22 @@ def main():
         batch_size=BATCH_SIZE,
         shuffle=True,
         class_mode="categorical")
+
+    # Adding custom Layers
+    new_custom_layers = model.output
+    new_custom_layers = Flatten()(new_custom_layers)
+    new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
+    new_custom_layers = Dropout(0.5)(new_custom_layers)
+    new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
+    predictions = Dense(train_generator.num_class, activation="softmax")(new_custom_layers)
+
+    # creating the final model
+    model_final = Model(inputs=model.input, outputs=predictions)
+
+    # compile the model
+    model_final.compile(loss="categorical_crossentropy",
+                        optimizer=optimizers.SGD(lr=LEARNING_RATE, momentum=0.9),
+                        metrics=["accuracy"])
 
     # select .h5 filename
     if args["fineTuningRate"] == 100:
