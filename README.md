@@ -1,8 +1,8 @@
 # __Cnn Keras Image Classifier__ (with NVIDIA cuda)  
-__autor__: Gabriel Kirsten Menezes (gabriel.kirsten@hotmail.com)  
-__version__: 1.0.0  
+__Autor__: Gabriel Kirsten Menezes (gabriel.kirsten@hotmail.com)  
+__Version__: 1.0.1  
 
-A simple image classifier built with __Keras__ using __cuda__ libraries.  
+A simple and generic image classifier built with __Keras__ using __cuda__ libraries.  
 
 ### Requirements:
 __You must Install:__  
