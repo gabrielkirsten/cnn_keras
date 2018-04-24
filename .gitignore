@@ -17,3 +17,11 @@ Thumbs.db
 # Pycharm files #
 #################
 .idea
+
+# VisualStudio Code files #
+###########################
+.vscode
+
+# Model Weights #
+#################
+models_checkpoints/*
