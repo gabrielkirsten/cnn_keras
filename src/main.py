@@ -132,7 +132,9 @@ def main():
             model = applications.MobileNet(
                 weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
 
-        for layer in model.layers[:int(len(model.layers) * (args["fineTuningRate"] / 100))]:
+        n_layers = len(model.layers)
+        last_layers = n_layers - int(n_layers * (args["fineTuningRate"] / 100))
+        for layer in model.layers[:last_layers]:
             layer.trainable = False
 
     else:  # without transfer learning
@@ -207,7 +209,7 @@ def main():
                         metrics=["accuracy"])
 
     # select .h5 filename
-    if args["fineTuningRate"] == 100:
+    if args["fineTuningRate"] == 0:
         file_name = args["architecture"] + \
             '_transfer_learning'
     elif args["fineTuningRate"] == -1:
