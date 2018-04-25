@@ -132,8 +132,9 @@ def main():
             model = applications.MobileNet(
                 weights="imagenet", include_top=False, input_shape=(IMG_WIDTH, IMG_HEIGHT, 3))
 
+	# calculate how much layers won't be retrained according on fineTuningRate parameter
         n_layers = len(model.layers)
-        last_layers = n_layers - int(n_layers * (args["fineTuningRate"] / 100))
+        last_layers = n_layers - int(n_layers * (args["fineTuningRate"] / 100.))
         for layer in model.layers[:last_layers]:
             layer.trainable = False
 
