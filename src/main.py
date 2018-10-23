@@ -203,7 +203,7 @@ def main():
 	num_classes = train_generator.num_class
     except:
 	num_classes = train_generator.num_classes
-    predictions = Dense(train_generator.num_classes, activation="softmax")(new_custom_layers)
+    predictions = Dense(num_classes, activation="softmax")(new_custom_layers)
 
     # creating the final model
     model_final = Model(inputs=model.input, outputs=predictions)
