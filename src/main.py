@@ -199,7 +199,11 @@ def main():
     new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
     new_custom_layers = Dropout(0.5)(new_custom_layers)
     new_custom_layers = Dense(1024, activation="relu")(new_custom_layers)
-    predictions = Dense(train_generator.num_class, activation="softmax")(new_custom_layers)
+    try:
+	num_classes = train_generator.num_class
+    except:
+	num_classes = train_generator.num_classes
+    predictions = Dense(num_classes, activation="softmax")(new_custom_layers)
 
     # creating the final model
     model_final = Model(inputs=model.input, outputs=predictions)
